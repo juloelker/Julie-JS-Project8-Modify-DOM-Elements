@@ -70,61 +70,51 @@ for (let i = 0; i < numItemsClass.length; i++) {
 console.log(numList);
 
 //add a class to bulleted items, did not work
-//probably because I should be adding a class
-//to one element, not to a list of elements
-// const bulletItems = document.querySelector(".bullet-list");
-// console.log(bulletItems);
-// for (let i = 0; i < bulletItems.length; i++) {
-//   bulletItems[i].addClassName = "new-class";
-// }
-// console.log(bulletItems);
-// console.log(document.querySelector("ul"));
-// const bulletsUpdated = document.getElementsByClassName("new-class");
-// console.log(bulletsUpdated); //empty HTML collection
+//because of the way I assigned bulletItems
+//should not be document.querySelector(".bullet-list")
+//querySelectorAll gives a node list of all bullet items
+//to add a class, use classList (NOT className) and list
+// all existing and new classes, separates by spaces
+const bulletItems = document.querySelectorAll(".bullet-item");
+console.log(bulletItems);
+for (let i = 0; i < bulletItems.length; i++) {
+  bulletItems[i].classList = "bullet-item new-class";
+}
+console.log(bulletItems);
 
-//add a className to the first bullet item in
-//the bulleted list
-//className is one property that can have multiple values,
-//i.e., multiple classes in the HTML element
-const bulletItem = document.querySelector("ul li");
-bulletItem.className = "bullet-item julie";
-console.log(bulletItem.classList);
+//remove new-class from one bullet
+bulletItems[0].classList.remove("new-class");
+console.log(bulletItems);
 
-//remove julie className
-bulletItem.classList.remove("julie");
-console.log(bulletItem.classList);
-
-//difference between classList and className
-//add more classes to the second bullet item
-//classList will add another class name to the existing
+//difference between classList and className:
+//classList will add another class name to the existing.
 //className will replace all classes with the ones being
-//supplied
-//again className is one property, replaces all classes on
-//a given element
-//classList is a list of all classes on a given element,
-// can add one or more to the mix
+//supplied.
+
+//add more classes to the 2nd item in the bullet list
 const bulletItemSecond = document.querySelector("ul li:nth-child(2)");
 bulletItemSecond.classList.add("class2", "class3");
 console.log(bulletItemSecond);
+console.log(bulletItems);
 
-bulletItemSecond.classList.remove("bullet-item");
+//remove them again
+bulletItemSecond.classList.remove("class2", "class3");
+console.log(bulletItems);
 
 // does it have an attribute?
 //set the href to google
 
 const bulletItemLink = document.querySelector("ul li:nth-child(5)");
 const target = bulletItemLink.children[0];
-
-console.log(bulletItemLink);
 const targetValue = (target.href = "http://google.com");
-console.log(targetValue);
-
 const hrefAttr = target.getAttribute("href");
-console.log(hrefAttr);
+console.log(bulletItemLink);
+console.log(bulletItems);
 
 // set another attribute, title
 target.setAttribute("title", "Google");
-console.log(target);
+console.log(bulletItemLink);
 
 // remove an attribute, from a bullet
-// target.removeAttribute("title");
+target.removeAttribute("title");
+console.log(bulletItemLink);
